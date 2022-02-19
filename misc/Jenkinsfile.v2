@@ -23,7 +23,8 @@ node {
      }                                   
      mysql.stop()
    }                                     
-   stage('docker build/push') {            
+   stage('docker build/push') {   
+     sh 'docker login'       
      docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
        def app = docker.build("fredysa/docker-nodejs-demo:${commit_id}", '.').push()
      }                                     
